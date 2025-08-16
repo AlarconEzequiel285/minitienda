@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Truck, CreditCard, Headphones, Instagram, Music2, Facebook, Menu, X} from "lucide-react";
 import { Swiper, SwiperSlide} from "swiper/react";
 import { Autoplay } from "swiper/modules";
