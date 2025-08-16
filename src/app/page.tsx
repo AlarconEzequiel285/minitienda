@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
+import { Truck, CreditCard, Headphones, Instagram, Music2, Facebook } from "lucide-react";
 
 export default function Home() {
 
@@ -106,12 +106,12 @@ export default function Home() {
             <div className="flex-1"></div>
             <div className="text-center">
               <h3 className="text-3xl font-bold text-black">
-                ANTICIPO SEASON 26
+                ENFANT DE DIEU // 26' SEASON
               </h3>
             </div>
             {/* Información adicional a la derecha */}
-            <div className="flex-1 text-right mr-25">
-              <p className="text-sm text-gray-600 leading-relaxed">
+            <div className="flex-shrink text-right ml-3">
+              <p className="text-sm text-gray-600">
                 (locales y online, envíos sin cargo a partir de $100.000)
               </p>
             </div>
@@ -169,7 +169,7 @@ export default function Home() {
 <section className="bg-white py-12">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="text-center">
-      <h3 className="text-3xl font-semibold text-black mb-8">
+      <h3 className="text-3xl font-bold text-black mb-8">
         Recomendaciones de la casa
       </h3>
     </div>
@@ -178,7 +178,7 @@ export default function Home() {
     <div className="flex flex-col md:flex-row justify-center items-center gap-12">
       {/* Contenedor 1: Hombre */}
       <div className="text-center">
-        <h4 className="text-2xl font-semibold text-black mb-6">Caballeros</h4>
+        <h4 className="text-2xl text-black mb-6">Caballeros</h4>
         <div className="relative mx-auto w-[700px] h-[400px]">
           <Image
             src="/images/diego.jpg"
@@ -191,7 +191,7 @@ export default function Home() {
 
       {/* Contenedor 2: Mujer */}
       <div className="text-center">
-        <h4 className="text-2xl font-semibold text-black mb-6">Damas</h4>
+        <h4 className="text-2xl text-black mb-6">Damas</h4>
         <div className="relative mx-auto w-[700px] h-[400px]">
           <Image
             src="/images/margaret.jpg"
@@ -204,8 +204,68 @@ export default function Home() {
     </div>
   </div>
 </section>
+    {/* Sección Beneficios*/}
+<section className="bg-white py-12">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-80 text-center">
+      
+      {/* Envío gratis */}
+      <div>
+        <Truck className="mx-auto h-10 w-10 text-black mb-4" />
+        <h4 className="text-lg font-semibold text-black">Envío gratis</h4>
+        <p className="text-sm text-gray-600">a partir de $100.000</p>
+      </div>
 
+      {/* 3 cuotas sin interés */}
+      <div>
+        <CreditCard className="mx-auto h-10 w-10 text-black mb-4" />
+        <h4 className="text-lg font-semibold text-black">3 cuotas sin interés</h4>
+        <p className="text-sm text-gray-600">con todas las tarjetas</p>
+      </div>
+
+      {/* Atención al cliente */}
+      <div>
+        <Headphones className="mx-auto h-10 w-10 text-black mb-4" />
+        <h4 className="text-lg font-semibold text-black">Atención al cliente</h4>
+        <p className="text-sm text-gray-600">contactanos +123456789</p>
+      </div>
 
     </div>
+  </div>
+</section>
+{/* Footer */}
+<footer className="bg-black text-white py-5 mt-12">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+      
+      {/* Información */}
+      <div className="text-sm text-gray-400">
+        Información: esta es una tienda ficticia creada como mini proyecto para mi portfolio personal.  
+        Las funciones están simplificadas. Para más información leer README.md
+      </div>
+
+      {/* Centro */}
+      <div className="text-center">
+        <p className="text-sm text-gray-200">Developed by Eze</p>
+      </div>
+
+      {/* Redes */}
+      <div className="flex justify-center md:justify-end space-x-6">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors">
+          <Instagram className="h-6 w-6" />
+        </a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">
+          <Music2 className="h-6 w-6" />
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">
+          <Facebook className="h-6 w-6" />
+        </a>
+      </div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+    
   );
 }
