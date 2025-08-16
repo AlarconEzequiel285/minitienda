@@ -105,7 +105,7 @@ export default function Home() {
             {/* Texto principal centrado */}
             <div className="flex-1"></div>
             <div className="text-center">
-              <h3 className="text-3xl font-bold text-gray-900">
+              <h3 className="text-3xl font-bold text-black">
                 ANTICIPO SEASON 26
               </h3>
             </div>
@@ -119,13 +119,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sección con 3 contenedores */}
+      {/* Sección con creá mostrá innová */}
       <section className="bg-white py-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center items-start gap-15">
             {/* Contenedor 1: creá */}
             <div className="flex-1 text-center">
-              <h4 className="text-3xl font-semibold text-gray-900 mb-8">creá</h4>
+              <h4 className="text-3xl font-semibold text-black mb-8">creá</h4>
               <div className="relative w-[500] h-[400px]">
               <Image
                 src="/images/crea.jpg"
@@ -138,7 +138,7 @@ export default function Home() {
 
             {/* Contenedor 2: mostrá */}
             <div className="flex-1 text-center">
-              <h4 className="text-3xl font-semibold text-gray-900 mb-8">mostrá</h4>
+              <h4 className="text-3xl font-semibold text-black mb-8">mostrá</h4>
               <div className="relative w-[500] h-[400px]">
               <Image
                 src="/images/mostra.jpg"
@@ -151,7 +151,7 @@ export default function Home() {
 
             {/* Contenedor 3: innova */}
             <div className="flex-1 text-center">
-              <h4 className="text-3xl font-semibold text-gray-900 mb-8">innová</h4>
+              <h4 className="text-3xl font-semibold text-black mb-8">innová</h4>
               <div className="relative w-[500] h-[400px]">
               <Image
                 src="/images/innova.jpg"
@@ -164,6 +164,48 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+{/* Sección con recomendaciones de la marca */}
+<section className="bg-white py-12">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center">
+      <h3 className="text-3xl font-semibold text-black mb-8">
+        Recomendaciones de la casa
+      </h3>
+    </div>
+
+    {/* Contenedor flexible con espacio */}
+    <div className="flex flex-col md:flex-row justify-center items-center gap-12">
+      {/* Contenedor 1: Hombre */}
+      <div className="text-center">
+        <h4 className="text-2xl font-semibold text-black mb-6">Caballeros</h4>
+        <div className="relative mx-auto w-[700px] h-[400px]">
+          <Image
+            src="/images/diego.jpg"
+            alt="Hombre"
+            fill
+            className="rounded-lg shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer object-cover"
+          />
+        </div>
+      </div>
+
+      {/* Contenedor 2: Mujer */}
+      <div className="text-center">
+        <h4 className="text-2xl font-semibold text-black mb-6">Damas</h4>
+        <div className="relative mx-auto w-[700px] h-[400px]">
+          <Image
+            src="/images/margaret.jpg"
+            alt="Mujer"
+            fill
+            className="rounded-lg shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
     </div>
   );
 }
