@@ -47,6 +47,9 @@ export default function CategorySection({ category }: Props) {
     router.push("/");
     };
 
+    const handleCarritoClick = () => router.push("/carrito");
+    const handleComprasClick = () => router.push("/");
+  
 
   useEffect(() => {
     async function fetchProducts() {
@@ -89,8 +92,8 @@ export default function CategorySection({ category }: Props) {
 
 {/* Botones de escritorio a la derecha */}
 <div className="hidden md:flex space-x-3">
-  <button className="text-sm font-medium text-black">CARRITO</button>
-  <button className="text-sm font-medium text-black">MIS COMPRAS</button>
+  <button onClick={handleCarritoClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">CARRITO</button>
+  <button onClick={handleComprasClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">MIS COMPRAS</button>
 </div>
 
             {/* Botón hamburguesa móvil */}
@@ -110,8 +113,8 @@ export default function CategorySection({ category }: Props) {
               <li><button onClick={() =>{setMenuOpen(false); handleCamperasClick();}}>CAMPERAS</button></li>
               <li><button onClick={() =>{setMenuOpen(false); handleRemerasClick();}}>REMERAS</button></li>
               <li><button onClick={() =>{setMenuOpen(false); handlePantalonesClick();}}>PANTALONES</button></li>
-              <li><button onClick={() => setMenuOpen(false)}>CARRITO</button></li>
-              <li><button onClick={() => setMenuOpen(false)}>MIS COMPRAS</button></li>
+              <li><button onClick={() =>{setMenuOpen(false); handleCarritoClick();}}>CARRITO</button></li>
+              <li><button onClick={() =>{setMenuOpen(false); handleComprasClick();}}>MIS COMPRAS</button></li>
             </ul>
           </nav>
         )}
