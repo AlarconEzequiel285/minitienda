@@ -48,7 +48,7 @@ export default function CategorySection({ category }: Props) {
     };
 
     const handleCarritoClick = () => router.push("/carrito");
-    const handleComprasClick = () => router.push("/");
+    const handleComprasClick = () => router.push("/compras");
   
 
   useEffect(() => {

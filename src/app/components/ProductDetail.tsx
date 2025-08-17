@@ -23,7 +23,7 @@ export default function ProductDetail({ product }: Props) {
   const handlePantalonesClick = () => router.push("/pantalones");
   const handleMainPageClick = () => router.push("/");
   const handleCarritoClick = () => router.push("/carrito");
-  const handleComprasClick = () => router.push("/");
+  const handleComprasClick = () => router.push("/compras");
 
   // Inicializar carrito
   useEffect(() => {
@@ -152,7 +152,7 @@ export default function ProductDetail({ product }: Props) {
               </button>
 
               {/* Mensaje agregado */}
-              {added && <p className="text-green-600 font-semibold mt-2">Producto agregado al carrito.</p>}
+              {added && <p className="absolute text-green-600 font-semibold mt-73 pl-5">Producto agregado al carrito.</p>}
             </div>
           </div>
         </main>

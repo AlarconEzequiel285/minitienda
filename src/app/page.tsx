@@ -28,6 +28,9 @@ export default function Home() {
   router.push("/pantalones");
   };
 
+  const handleCarritoClick = () => router.push("/carrito");
+  const handleComprasClick = () => router.push("/compras");
+
   const [scrolled, setScrolled] = useState(false);// Header transparente segun el scroll del usuario
   const [menuOpen, setMenuOpen] = useState(false); //Menu hamburguersa responsive
 
@@ -81,8 +84,8 @@ export default function Home() {
       {/* Botones de escritorio a la derecha */}
       {scrolled && (
       <div className="hidden md:flex space-x-3">
-        <button className={`text-sm font-medium ${scrolled ? "text-black" : "text-white"}`}>CARRITO</button>
-        <button className={`text-sm font-medium ${scrolled ? "text-black" : "text-white"}`}>MIS COMPRAS</button>
+        <button onClick={handleCarritoClick} className={`text-sm font-medium ${scrolled ? "text-black hover:scale-110 transition-transform" : "text-white"}`}>CARRITO</button>
+        <button onClick={handleComprasClick} className={`text-sm font-medium ${scrolled ? "text-black hover:scale-110 transition-transform" : "text-white"}`}>MIS COMPRAS</button>
       </div>
       )}
 
@@ -103,8 +106,8 @@ export default function Home() {
         <li><button onClick={() =>{setMenuOpen(false); handleCamperasClick();}}>CAMPERAS</button></li>
         <li><button onClick={() =>{setMenuOpen(false); handleRemerasClick();}}>REMERAS</button></li>
         <li><button onClick={() =>{setMenuOpen(false); handlePantalonesClick();}}>PANTALONES</button></li>
-        <li><button onClick={() => setMenuOpen(false)}>CARRITO</button></li>
-        <li><button onClick={() => setMenuOpen(false)}>MIS COMPRAS</button></li>
+        <li><button onClick={() =>{setMenuOpen(false); handleCarritoClick(); }}>CARRITO</button></li>
+        <li><button onClick={() =>{setMenuOpen(false); handleComprasClick(); }}>MIS COMPRAS</button></li>
       </ul>
     </nav>
   )}
@@ -128,7 +131,7 @@ export default function Home() {
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-50">
           <div className="text-center">
             <h2 className="text-4xl font-semibold text-white mt-50">
-              creá, mostrá, innova
+              creá. mostrá. innova.
             </h2>
           </div>
         </div>
