@@ -64,7 +64,6 @@ export default function Home() {
       {/* Botones de escritorio */}
       {scrolled && (
       <div className="hidden md:flex space-x-4">
-        <button className={`text-sm font-medium ${scrolled ? "text-black" : "text-white"}`}>SALE</button>
         <button onClick={handleCamperasClick} className={`text-sm font-medium ${scrolled ? "text-black hover:scale-110 transition-transform" : "text-white"}`}>CAMPERAS</button>
         <button onClick={handleRemerasClick} className={`text-sm font-medium ${scrolled ? "text-black hover:scale-110 transition-transform" : "text-white"}`}>REMERAS</button>
         <button onClick={handlePantalonesClick} className={`text-sm font-medium ${scrolled ? "text-black hover:scale-110 transition-transform" : "text-white"}`}>PANTALONES</button>
@@ -102,7 +101,6 @@ export default function Home() {
   {menuOpen && (
     <nav className="md:hidden absolute top-16 bg-white shadow-lg border-t border-gray-200 w-full">
       <ul className="flex flex-col items-center py-4 space-y-4 text-gray-700">
-        <li><button onClick={() => setMenuOpen(false)}>SALE</button></li>
         <li><button onClick={() =>{setMenuOpen(false); handleCamperasClick();}}>CAMPERAS</button></li>
         <li><button onClick={() =>{setMenuOpen(false); handleRemerasClick();}}>REMERAS</button></li>
         <li><button onClick={() =>{setMenuOpen(false); handlePantalonesClick();}}>PANTALONES</button></li>
@@ -131,7 +129,7 @@ export default function Home() {
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-50">
           <div className="text-center">
             <h2 className="text-4xl font-semibold text-white mt-50">
-              creá. mostrá. innova.
+              creá. mostrá. innová.
             </h2>
           </div>
         </div>
@@ -226,7 +224,7 @@ export default function Home() {
       {/* Contenedor 1: Hombre */}
       <div className="text-center w-full md:w-auto">
         <h4 className="text-2xl text-black mb-6">Caballeros</h4>
-        <div className="relative mx-auto w-[700px] h-[400px] max-w-full">
+        <div onClick={() => router.push("/productos/68a13662ebbc04e884860858")} className="relative mx-auto w-[700px] h-[400px] max-w-full">
           <Image
             src="/images/diego.jpg"
             alt="Hombre"
@@ -239,7 +237,7 @@ export default function Home() {
       {/* Contenedor 2: Mujer */}
       <div className="text-center w-full md:w-auto">
         <h4 className="text-2xl text-black mb-6">Damas</h4>
-        <div className="relative mx-auto w-[700px] h-[400px] max-w-full">
+        <div onClick={() => router.push("/productos/68a135c5ebbc04e884860855")} className="relative mx-auto w-[700px] h-[400px] max-w-full">
           <Image
             src="/images/margaret.jpg"
             alt="Mujer"

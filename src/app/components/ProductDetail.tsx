@@ -14,6 +14,8 @@ export default function ProductDetail({ product }: Props) {
   const [loading, setLoading] = useState(false);
   const [added, setAdded] = useState(false);
   const [cart, setCart] = useState<{ productId: string; quantity: number }[]>([]);
+  const [selectedSize, setSelectedSize] = useState<string>("M");
+
 
   const router = useRouter();
 
@@ -49,7 +51,7 @@ export default function ProductDetail({ product }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ productId: product._id, quantity: 1 }),
+        body: JSON.stringify({ productId: product._id, quantity: 1, size: selectedSize }),
       });
 
       if (!res.ok) {
@@ -71,7 +73,7 @@ export default function ProductDetail({ product }: Props) {
   return (
     <>
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 transition-colors duration-300 bg-white">
+      <header className="fixed top-0 w-full z-50 transition-colors duration-300 bg-white shadow">
         <div className="w-full px-4 sm:px-6 lg:px-5">
           <div className="flex items-center justify-between h-16">
             {/* Botones escritorio */}
@@ -129,7 +131,7 @@ export default function ProductDetail({ product }: Props) {
             </div>
 
             {/* Info producto */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 relative">
               <h1 className="text-4xl font-bold text-black">{product.name}</h1>
               <p className="text-2xl text-green-700 font-semibold">${product.price.toLocaleString()}</p>
               <p className="text-sm text-gray-500 -mt-2">3 cuotas sin interés de ${(product.price / 3).toLocaleString()}</p>
@@ -141,6 +143,18 @@ export default function ProductDetail({ product }: Props) {
                 <FaCcAmazonPay className="text-gray-600 text-4xl" />
                 <FaPaypal className="text-blue-900 text-4xl" />
               </div>
+              <div className="flex gap-2 mt-3">
+                  {["S", "M", "L"].map(size => (
+                    <button
+                      key={size}
+                      className={`px-3 py-1 border rounded ${selectedSize === size ? "bg-black text-white" : "bg-white text-black"}`}
+                      onClick={() => setSelectedSize(size)}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+
 
               {/* Botón agregar al carrito */}
               <button
@@ -152,7 +166,7 @@ export default function ProductDetail({ product }: Props) {
               </button>
 
               {/* Mensaje agregado */}
-              {added && <p className="absolute text-green-600 font-semibold mt-73 pl-5">Producto agregado al carrito.</p>}
+              {added && <p className="absolute top-full mt-2 text-green-600 font-semibold pl-5">Producto agregado al carrito.</p>}
             </div>
           </div>
         </main>

@@ -14,6 +14,7 @@ interface Product {
 interface CartItem {
   productId: string;
   quantity: number;
+  size: string;
   product?: Product;
 }
 
@@ -62,15 +63,15 @@ export default function CartPage() {
     }
   };
 
-  const handleRemoveItem = async (productId: string) => {
-    setRemoving(productId);
+  const handleRemoveItem = async (productId: string, size: string) => {
+    setRemoving(`${productId}-${size}`);
     setTimeout(async () => {
       try {
         const res = await fetch("/api/cart/item", {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
-          body: JSON.stringify({ productId }),
+          body: JSON.stringify({ productId, size }),
         });
         if (res.ok) {
           const data = await res.json();
@@ -138,11 +139,10 @@ export default function CartPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-white transition-colors duration-300">
+      <header className="fixed top-0 w-full z-50 bg-white transition-colors duration-300 shadow">
         <div className="w-full px-4 sm:px-6 lg:px-5">
           <div className="flex items-center justify-between h-16">
             <div className="hidden md:flex space-x-4">
-              <button className="text-sm font-medium text-black">SALE</button>
               <button onClick={handleCamperasClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">CAMPERAS</button>
               <button onClick={handleRemerasClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">REMERAS</button>
               <button onClick={handlePantalonesClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">PANTALONES</button>
@@ -166,7 +166,6 @@ export default function CartPage() {
         {menuOpen && (
           <nav className="md:hidden absolute top-16 bg-white shadow-lg border-t border-gray-200 w-full">
             <ul className="flex flex-col items-center py-4 space-y-4 text-gray-700">
-              <li><button onClick={() => setMenuOpen(false)}>SALE</button></li>
               <li><button onClick={() =>{setMenuOpen(false); handleCamperasClick();}}>CAMPERAS</button></li>
               <li><button onClick={() =>{setMenuOpen(false); handleRemerasClick();}}>REMERAS</button></li>
               <li><button onClick={() =>{setMenuOpen(false); handlePantalonesClick();}}>PANTALONES</button></li>
@@ -186,13 +185,13 @@ export default function CartPage() {
         ) : (
           <div className="flex flex-col gap-6 w-full max-w-3xl">
             {cartWithProducts.map(item => (
-              <div key={item.productId} className={`flex items-center gap-6 bg-gray-200 p-4 rounded-xl shadow transition-all duration-300 transform ${removing === item.productId ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
+              <div key={`${item.productId}-${item.size}`} className={`flex items-center gap-6 bg-gray-200 p-4 rounded-xl shadow transition-all duration-300 transform ${removing === item.productId ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
                 <img src={item.product!.imageUrl} alt={item.product!.name} className="w-28 h-28 object-contain rounded"/>
                 <div className="flex flex-col justify-center flex-1">
-                  <h2 className="text-xl font-semibold text-black">{item.product!.name} {item.quantity > 1 && `x${item.quantity}`}</h2>
+                  <h2 className="text-xl font-semibold text-black">{item.product!.name} ({item.size}) {item.quantity > 1 && `x${item.quantity}`}</h2>
                   <p className="text-lg text-black mt-1">${(item.product!.price * item.quantity).toLocaleString()}</p>
                 </div>
-                <button onClick={() => handleRemoveItem(item.productId)} className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition">Eliminar</button>
+                <button onClick={() => handleRemoveItem(item.productId, item.size)} className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition">Eliminar</button>
               </div>
             ))}
 

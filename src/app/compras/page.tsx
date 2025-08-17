@@ -14,6 +14,7 @@ interface Product {
 interface CartItem {
   productId: string;
   quantity: number;
+  size: string;
   product?: Product;
 }
 
@@ -55,13 +56,12 @@ export default function ComprasPage() {
   const handleCarritoClick = () => router.push("/carrito");
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-white shadow">
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-white transition-colors duration-300">
+      <header className="fixed top-0 w-full z-50 bg-white shadow transition-colors duration-300">
         <div className="w-full px-4 sm:px-6 lg:px-5">
           <div className="flex items-center justify-between h-16">
             <div className="hidden md:flex space-x-4">
-              <button className="text-sm font-medium text-black">SALE</button>
               <button onClick={handleCamperasClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">CAMPERAS</button>
               <button onClick={handleRemerasClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">REMERAS</button>
               <button onClick={handlePantalonesClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">PANTALONES</button>
@@ -84,7 +84,6 @@ export default function ComprasPage() {
         {menuOpen && (
           <nav className="md:hidden absolute top-16 bg-white shadow-lg border-t border-gray-200 w-full">
             <ul className="flex flex-col items-center py-4 space-y-4 text-gray-700">
-              <li><button onClick={() => setMenuOpen(false)}>SALE</button></li>
               <li><button onClick={() =>{setMenuOpen(false); handleCamperasClick();}}>CAMPERAS</button></li>
               <li><button onClick={() =>{setMenuOpen(false); handleRemerasClick();}}>REMERAS</button></li>
               <li><button onClick={() =>{setMenuOpen(false); handlePantalonesClick();}}>PANTALONES</button></li>
@@ -96,8 +95,10 @@ export default function ComprasPage() {
 
       {/* Main content */}
       <main className="flex-1 flex flex-col items-center px-4 py-10 w-full pt-28">
-        <h1 className="text-2xl text-black mb-8">Mis Compras</h1>
-
+        <h1 className="text-2xl text-black">Mis Compras</h1>
+        <h3 className="text-black text-justify mt-1">disclaimer: la tienda es ficticia. las funciones de comprar están simplificadas por este motivo.</h3>
+        <h3 className="text-black text-justify">al no haber registro, el manejo de sesiones se hace mediante cookies del navegador, los inventarios no se comparten entre usuarios gracias a esto.</h3>
+        <h3 className="text-black text-justify mb-5">vistas de usuario construidas en next.js, diseños en tailwind.css, lógica del servidor en node.js, productos y sesiones de usuario almacenadas en mongodb.</h3>
         {purchases.length === 0 ? (
           <p className="text-black text-lg">No tienes compras realizadas.</p>
         ) : (
@@ -120,8 +121,8 @@ export default function ComprasPage() {
                   <p className="font-semibold text-black mb-1">Productos:</p>
                   <ul className="list-disc list-inside text-black">
                     {purchase.cart.map(item => (
-                      <li key={item.productId}>
-                        {item.product?.name} x{item.quantity} - ${(item.product!.price * item.quantity).toLocaleString()}
+                      <li key={`${item.productId}-${item.size}`}>
+                        {item.product?.name} ({item.size}) x{item.quantity} - ${(item.product!.price * item.quantity).toLocaleString()}
                       </li>
                     ))}
                   </ul>

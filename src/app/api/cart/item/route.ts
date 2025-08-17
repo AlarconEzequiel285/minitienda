@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 
-type CartItem = { productId: string; quantity: number };
+type CartItem = { productId: string; quantity: number; size: string };
 type SessionDoc = { sessionId: string; cart: CartItem[]; createdAt: Date };
 
 async function getSessionsCollection() {
@@ -30,13 +30,13 @@ export async function DELETE(req: Request) {
     const { sessionId, headers } = ensureSessionIdCookie(req);
 
     const body = await req.json();
-    const { productId } = body;
-    if (!productId) return NextResponse.json({ error: "Missing productId" }, { status: 400, headers });
+    const { productId, size } = body;
+    if (!productId || !size) return NextResponse.json({ error: "Missing productId or size" }, { status: 400, headers });
 
     const sessions = await getSessionsCollection();
     await sessions.updateOne(
       { sessionId },
-      { $pull: { cart: { productId } } }
+      { $pull: { cart: { productId, size } } }
     );
 
     const updatedSession = await sessions.findOne({ sessionId });

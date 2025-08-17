@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 
-type CartItem = { productId: string; quantity: number };
+type CartItem = { productId: string; quantity: number; size: string};
 type SessionDoc = { sessionId: string; cart: CartItem[]; createdAt: Date };
 
 async function getSessionsCollection() {
@@ -30,19 +30,19 @@ export async function POST(req: Request) {
     const { sessionId, headers } = ensureSessionIdCookie(req);
 
     const body = await req.json();
-    const { productId, quantity } = body;
-    if (!productId || !quantity) return NextResponse.json({ error: "Missing data" }, { status: 400, headers });
+    const { productId, quantity, size } = body;
+    if (!productId || !quantity || !size) return NextResponse.json({ error: "Missing data" }, { status: 400, headers });
 
     const sessions = await getSessionsCollection();
     const session = await sessions.findOne({ sessionId });
 
     if (session) {
-      const index = session.cart.findIndex(c => c.productId === productId);
+      const index = session.cart.findIndex(c => c.productId === productId && c.size === size);
       if (index >= 0) session.cart[index].quantity += quantity;
-      else session.cart.push({ productId, quantity });
+      else session.cart.push({ productId, quantity, size });
       await sessions.updateOne({ sessionId }, { $set: { cart: session.cart } });
     } else {
-      await sessions.insertOne({ sessionId, cart: [{ productId, quantity }], createdAt: new Date() });
+      await sessions.insertOne({ sessionId, cart: [{ productId, quantity, size }], createdAt: new Date() });
     }
 
     const updatedSession = await sessions.findOne({ sessionId });
