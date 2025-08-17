@@ -1,8 +1,11 @@
+//Este layout se encarga de mostrar cada sección de productos y acomodarlos según orden de agregado en la base de datos.
+//Depende de api/products/route.ts
+
 'use client';
 import { useEffect, useState } from "react";
 import { Menu, X, Instagram, Facebook, Music2} from "lucide-react";
 import { useRouter } from "next/navigation";
-
+import  Link  from "next/link";
 
 interface Product {
   _id: string;
@@ -61,10 +64,6 @@ export default function CategorySection({ category }: Props) {
     fetchProducts();
   }, [category]);
 
-  const handleHomeClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
@@ -117,54 +116,86 @@ export default function CategorySection({ category }: Props) {
           </nav>
         )}
       </header>
-
-      {/* Contenido */}
-      <main className="pt-20 p-4">
-        <h2 className="text-3xl font-bold mb-4 text-black">{category.toUpperCase()}</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {products.map((p: Product) => (
-            <div key={p._id} className="border p-2 rounded shadow hover:shadow-lg transition">
-              <img src={p.imageUrl} alt={p.name} className="w-full h-120 object-cover mb-2" />
-              <h3 className="font-semibold text-black text-center">{p.name}</h3>
-              <p className="text-black text-center">${p.price.toLocaleString()}</p>
-              <p className="text-sm text-gray-500 text-center">3 cuotas sin interés de ${(p.price/3).toLocaleString()}</p>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      {/* Footer */}
-    <footer className="bg-black text-white py-5 mt-31">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-      
-      {/* Información */}
-      <div className="">
-        <p className="text-sm text-gray-400">Información: esta es una tienda ficticia creada como mini proyecto para mi portfolio personal.  
-        Las funciones están simplificadas. Para más información leer README.md</p>
-      </div>
-
-      {/* Centro */}
-      <div className="text-center">
-        <p className="text-sm text-gray-200">Developed by Eze</p>
-      </div>
-
-      {/* Redes */}
-      <div className="flex justify-center md:justify-end space-x-6">
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors">
-          <Instagram className="h-6 w-6" />
-        </a>
-        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">
-          <Music2 className="h-6 w-6" />
-        </a>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">
-          <Facebook className="h-6 w-6" />
-        </a>
-      </div>
-
+      <div className="flex flex-col min-h-screen bg-white">
+  {/* Contenido */}
+  <main className="flex-1 pt-20 pb-10">
+    <h2 className="text-3xl font-bold pl-10 text-black">
+      {category.toUpperCase()}
+    </h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pt-7 px-6 justify-items-center">
+      {products.map((p: Product) => (
+        <Link
+          key={p._id}
+          href={`/productos/${p._id}`}
+          className="bg-gray-100 border p-3 rounded-lg shadow hover:shadow-lg transition w-full max-w-sm"
+        >
+          <img
+            src={p.imageUrl}
+            alt={p.name}
+            className="w-full h-96 object-cover mb-3 rounded-md"
+          />
+          <h3 className="font-semibold text-black text-center">{p.name}</h3>
+          <p className="text-black text-center">${p.price.toLocaleString()}</p>
+          <p className="text-sm text-gray-500 text-center">
+            3 cuotas sin interés de ${(p.price / 3).toLocaleString()}
+          </p>
+        </Link>
+      ))}
     </div>
-  </div>
-</footer>
+    <p className="text-center text-black text-lg font-medium mt-25">
+        No está lo que te gusta? Pronto renovaremos stock.
+      </p>
+  </main>
+
+  {/* Footer */}
+  <footer className="bg-black text-white py-5 mt-auto">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        {/* Información */}
+        <div>
+          <p className="text-sm text-gray-400">
+            Información: esta es una tienda ficticia creada como mini proyecto
+            para mi portfolio personal. Las funciones están simplificadas. Para
+            más información leer README.md
+          </p>
+        </div>
+
+        {/* Centro */}
+        <div className="text-center">
+          <p className="text-sm text-gray-200">Developed by Eze</p>
+        </div>
+
+        {/* Redes */}
+        <div className="flex justify-center md:justify-end space-x-6">
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-pink-500 transition-colors"
+          >
+            <Instagram className="h-6 w-6" />
+          </a>
+          <a
+            href="https://tiktok.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-400 transition-colors"
+          >
+            <Music2 className="h-6 w-6" />
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-500 transition-colors"
+          >
+            <Facebook className="h-6 w-6" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
     </div>
   );
 }

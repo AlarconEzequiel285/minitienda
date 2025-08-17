@@ -148,7 +148,7 @@ export default function Home() {
             {/* Información adicional a la derecha */}
             <div className="flex-1 text-center">
               <p className="text-sm text-gray-600">
-                (locales y online, envíos sin cargo a partir de $100.000)
+                (locales y online, envíos sin cargo a partir de $500.000)
               </p>
             </div>
         </div>
@@ -263,7 +263,7 @@ export default function Home() {
       <div>
         <Truck className="mx-auto h-10 w-10 text-black mb-4" />
         <h4 className="text-lg font-semibold text-black">Envío gratis</h4>
-        <p className="text-sm text-gray-600">a partir de $100.000</p>
+        <p className="text-sm text-gray-600">a partir de $500.000</p>
       </div>
 
       {/* 3 cuotas sin interés */}
