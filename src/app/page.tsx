@@ -5,10 +5,28 @@ import { useState, useEffect } from "react";
 import { Truck, CreditCard, Headphones, Instagram, Music2, Facebook, Menu, X} from "lucide-react";
 import { Swiper, SwiperSlide} from "swiper/react";
 import { Autoplay } from "swiper/modules";
-
+import { useRouter } from "next/navigation";
 import "swiper/css";
 
+
 export default function Home() {
+  //Redirecciones 
+  const router = useRouter();
+
+  //Redirección a camperas desde el header
+  const handleCamperasClick = () => {
+    router.push("/camperas");
+  };
+
+  //Redirección a remeras desde el header
+  const handleRemerasClick = () => {
+  router.push("/remeras");
+  };
+
+  //Redirección a remeras desde el header
+  const handlePantalonesClick = () => {
+  router.push("/pantalones");
+  };
 
   const [scrolled, setScrolled] = useState(false);// Header transparente segun el scroll del usuario
   const [menuOpen, setMenuOpen] = useState(false); //Menu hamburguersa responsive
@@ -44,9 +62,9 @@ export default function Home() {
       {scrolled && (
       <div className="hidden md:flex space-x-4">
         <button className={`text-sm font-medium ${scrolled ? "text-black" : "text-white"}`}>SALE</button>
-        <button className={`text-sm font-medium ${scrolled ? "text-black" : "text-white"}`}>CAMPERAS</button>
-        <button className={`text-sm font-medium ${scrolled ? "text-black" : "text-white"}`}>REMERAS</button>
-        <button className={`text-sm font-medium ${scrolled ? "text-black" : "text-white"}`}>PANTALONES</button>
+        <button onClick={handleCamperasClick} className={`text-sm font-medium ${scrolled ? "text-black hover:scale-110 transition-transform" : "text-white"}`}>CAMPERAS</button>
+        <button onClick={handleRemerasClick} className={`text-sm font-medium ${scrolled ? "text-black hover:scale-110 transition-transform" : "text-white"}`}>REMERAS</button>
+        <button onClick={handlePantalonesClick} className={`text-sm font-medium ${scrolled ? "text-black hover:scale-110 transition-transform" : "text-white"}`}>PANTALONES</button>
        </div>
       )}
 
@@ -82,9 +100,9 @@ export default function Home() {
     <nav className="md:hidden absolute top-16 bg-white shadow-lg border-t border-gray-200 w-full">
       <ul className="flex flex-col items-center py-4 space-y-4 text-gray-700">
         <li><button onClick={() => setMenuOpen(false)}>SALE</button></li>
-        <li><button onClick={() => setMenuOpen(false)}>CAMPERAS</button></li>
-        <li><button onClick={() => setMenuOpen(false)}>REMERAS</button></li>
-        <li><button onClick={() => setMenuOpen(false)}>PANTALONES</button></li>
+        <li><button onClick={() =>{setMenuOpen(false); handleCamperasClick();}}>CAMPERAS</button></li>
+        <li><button onClick={() =>{setMenuOpen(false); handleRemerasClick();}}>REMERAS</button></li>
+        <li><button onClick={() =>{setMenuOpen(false); handlePantalonesClick();}}>PANTALONES</button></li>
         <li><button onClick={() => setMenuOpen(false)}>CARRITO</button></li>
         <li><button onClick={() => setMenuOpen(false)}>MIS COMPRAS</button></li>
       </ul>
