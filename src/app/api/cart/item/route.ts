@@ -10,34 +10,37 @@ async function getSessionsCollection() {
   return client.db("watersugar").collection<SessionDoc>("sessions");
 }
 
-function getSessionId(req: Request): string | null {
+// Función para generar headers con cookie si no existe sessionId
+function ensureSessionIdCookie(req: Request): { sessionId: string; headers?: Record<string, string> } {
   const cookieHeader = req.headers.get("cookie");
-  if (!cookieHeader) return null;
-  const match = cookieHeader.match(/sessionId=([^;]+)/);
-  return match ? match[1] : null;
+  let sessionId = cookieHeader?.match(/sessionId=([^;]+)/)?.[1];
+  const headers: Record<string, string> = {};
+
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    headers["Set-Cookie"] = `sessionId=${sessionId}; Path=/; HttpOnly; SameSite=Lax`;
+  }
+
+  return { sessionId, headers: Object.keys(headers).length ? headers : undefined };
 }
 
+// DELETE: eliminar un item del carrito
 export async function DELETE(req: Request) {
   try {
-    const sessionId = getSessionId(req);
-    if (!sessionId) return NextResponse.json({ error: "No session" }, { status: 400 });
+    const { sessionId, headers } = ensureSessionIdCookie(req);
 
     const body = await req.json();
     const { productId } = body;
-    if (!productId) return NextResponse.json({ error: "Missing productId" }, { status: 400 });
+    if (!productId) return NextResponse.json({ error: "Missing productId" }, { status: 400, headers });
 
     const sessions = await getSessionsCollection();
-    const session = await sessions.findOne({ sessionId });
-    if (!session) return NextResponse.json({ ok: true, cart: [] });
-
-    // Eliminar solo el item que coincida con productId
     await sessions.updateOne(
       { sessionId },
       { $pull: { cart: { productId } } }
     );
 
     const updatedSession = await sessions.findOne({ sessionId });
-    return NextResponse.json({ ok: true, cart: updatedSession?.cart || [] });
+    return NextResponse.json({ ok: true, cart: updatedSession?.cart || [] }, { headers });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
