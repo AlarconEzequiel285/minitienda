@@ -78,7 +78,6 @@ export default function ProductDetail({ product }: Props) {
           <div className="flex items-center justify-between h-16">
             {/* Botones escritorio */}
             <div className="hidden md:flex space-x-4">
-              <button className="text-sm font-medium text-black">SALE</button>
               <button onClick={handleCamperasClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">CAMPERAS</button>
               <button onClick={handleRemerasClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">REMERAS</button>
               <button onClick={handlePantalonesClick} className="text-sm font-medium text-black hover:scale-110 transition-transform">PANTALONES</button>
@@ -110,7 +109,6 @@ export default function ProductDetail({ product }: Props) {
         {menuOpen && (
           <nav className="md:hidden absolute top-16 bg-white shadow-lg border-t border-gray-200 w-full">
             <ul className="flex flex-col items-center py-4 space-y-4 text-gray-700">
-              <li><button onClick={() => setMenuOpen(false)}>SALE</button></li>
               <li><button onClick={() => { setMenuOpen(false); handleCamperasClick(); }}>CAMPERAS</button></li>
               <li><button onClick={() => { setMenuOpen(false); handleRemerasClick(); }}>REMERAS</button></li>
               <li><button onClick={() => { setMenuOpen(false); handlePantalonesClick(); }}>PANTALONES</button></li>

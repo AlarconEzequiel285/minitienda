@@ -185,13 +185,13 @@ export default function CartPage() {
         ) : (
           <div className="flex flex-col gap-6 w-full max-w-3xl">
             {cartWithProducts.map(item => (
-              <div key={`${item.productId}-${item.size}`} className={`flex items-center gap-6 bg-gray-200 p-4 rounded-xl shadow transition-all duration-300 transform ${removing === item.productId ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
+              <div key={`${item.productId}-${item.size}`} className={`flex flex-wrap items-center gap-6 bg-gray-200 p-4 rounded-xl shadow transition-all duration-300 transform ${removing === item.productId ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
                 <img src={item.product!.imageUrl} alt={item.product!.name} className="w-28 h-28 object-contain rounded"/>
                 <div className="flex flex-col justify-center flex-1">
                   <h2 className="text-xl font-semibold text-black">{item.product!.name} ({item.size}) {item.quantity > 1 && `x${item.quantity}`}</h2>
                   <p className="text-lg text-black mt-1">${(item.product!.price * item.quantity).toLocaleString()}</p>
                 </div>
-                <button onClick={() => handleRemoveItem(item.productId, item.size)} className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition">Eliminar</button>
+                <button onClick={() => handleRemoveItem(item.productId, item.size)} className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition sm:px-3 sm:py-1">🗑️</button>
               </div>
             ))}
 
